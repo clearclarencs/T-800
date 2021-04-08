@@ -24,7 +24,7 @@ def refresh():
 def go(ctx):
     if settings["bot"] == "cybersole":
         headers = {"Cookie":settings["botCookie"], "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"}
-        #requests.get("https://cybersole.io/dashboard/tasks?quicktask="+ctx.embeds[0].url, headers=headers)
+        requests.get("https://cybersole.io/dashboard/tasks?quicktask="+ctx.embeds[0].url, headers=headers)
         print("Sent "+ctx.embeds[0].url)
     else:
         print(settings["bot"]+" bot not supported")
