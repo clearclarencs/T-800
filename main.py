@@ -31,7 +31,7 @@ def go(ctx):
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Activity(details="T-800 Monitoring..."))
+    await client.change_presence(activity=discord.Game("T-800 Monitoring..."))
 
 @client.event
 async def on_message(ctx):
