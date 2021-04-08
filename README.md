@@ -1,5 +1,5 @@
 # T-800
-**USE CAUTIOSLY** I accept no responsibility for any issues which may trigger quicktask for incorrect items
+**USE CAUTIOUSLY** I accept no responsibility for any issues which may trigger quicktask for incorrect items
 
 Discord bot which monitors monitors and auto sends bot quicktasks.
 
