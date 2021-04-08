@@ -22,16 +22,15 @@ def refresh():
 
 
 def go(ctx):
-    if settings["bot"] == "cybersole":
+    if settings["bot"] == "cybersoleqt":
         headers = {"Cookie":settings["botCookie"], "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"}
         requests.get("https://cybersole.io/dashboard/tasks?quicktask="+ctx.embeds[0].url, headers=headers)
-        print("Sent "+ctx.embeds[0].url)
+    if settings["bot"] == "cybersoleqt":
+        headers = {"Cookie":settings["botCookie"], "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"}
+        requests.get("https://cybersole.io/dashboard/tasks?linkchange="+ctx.embeds[0].url, headers=headers)
     else:
         print(settings["bot"]+" bot not supported")
-
-@client.event
-async def on_ready():
-    await client.change_presence(activity=discord.Game("T-800 Monitoring..."))
+    print("Sent "+ctx.embeds[0].url)
 
 @client.event
 async def on_message(ctx):
