@@ -1,5 +1,6 @@
 {
-    "bot": "cybersole",
-    "botCookie": "Cookies here",
-    "discordToken": "token here"
+    "bot": "cybersoleqt",
+    "botCookie": "dashboard_session=cookie;",
+    "discordToken": "token",
+    "cooldown": 5
 }

@@ -52,6 +52,7 @@ async def on_message(ctx):
                 break
         if goodKw and goodDom:
             go(ctx)
+            time.sleep(settings["cooldown"])
             return
 
 
