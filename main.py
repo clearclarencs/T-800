@@ -22,15 +22,25 @@ def refresh():
 
 
 def go(ctx):
+    try:
+        link = ctx.embeds[0].url
+        if len(str(link)) < 10:
+            raise
+    except:
+        link = ctx.embeds[0].description.split("](")[1].split(")")[0]
+        if len(str(link)) < 10:
+            raise
+    else:
+        print("Error parsing link "+ctx.embeds[0].description)
     if settings["bot"] == "cybersoleqt":
         headers = {"Cookie":settings["botCookie"], "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"}
-        requests.get("https://cybersole.io/dashboard/tasks?quicktask="+ctx.embeds[0].url, headers=headers)
+        requests.get("https://cybersole.io/dashboard/tasks?quicktask="+link, headers=headers)
     if settings["bot"] == "cybersoleqt":
         headers = {"Cookie":settings["botCookie"], "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"}
-        requests.get("https://cybersole.io/dashboard/tasks?linkchange="+ctx.embeds[0].url, headers=headers)
+        requests.get("https://cybersole.io/dashboard/tasks?linkchange="+link, headers=headers)
     else:
         print(settings["bot"]+" bot not supported")
-    print("Sent "+ctx.embeds[0].url)
+    print("Sent "+link)
 
 @client.event
 async def on_message(ctx):
@@ -43,7 +53,7 @@ async def on_message(ctx):
         goodKw = True
         goodDom = False
         for kw in keywordList:
-            if not kw.lower() in str(ctx.embeds[0].title).lower():
+            if not kw.lower() in str(str(ctx.embeds[0].title).lower()+str(ctx.embeds[0].title).lower()):
                 goodKw = False
                 break
         for domain in domains:
