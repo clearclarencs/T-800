@@ -28,12 +28,13 @@ def go(ctx):
         link = ctx.embeds[0].url
         if len(str(link)) < 10:
             raise KeyError
-    except KeyError:
-        link = ctx.embeds[0].description.split("](")[1].split(")")[0]
-        if len(str(link)) < 10:
-            raise
     except:
-        print("Error parsing link "+ctx.embeds[0].description)
+        try:
+            link = ctx.embeds[0].description.split("](")[1].split(")")[0]
+            if len(str(link)) < 10:
+                raise
+        except:
+            print("Error parsing link "+ctx.embeds[0].description)
     if settings["bot"] == "cybersoleqt":
         headers = {"Cookie":settings["botCookie"], "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"}
         requests.get("https://cybersole.io/dashboard/tasks?quicktask="+link, headers=headers)
