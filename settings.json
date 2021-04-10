@@ -1,6 +1,7 @@
 {
     "bot": "cybersoleqt",
-    "botCookie": "dashboard_session=cookie;",
-    "discordToken": "token",
-    "cooldown": 5
+    "botCookie": "dashboard_session=;",
+    "discordToken": "",
+    "cooldown": 5,
+    "webhook": ""
 }

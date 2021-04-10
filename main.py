@@ -1,5 +1,5 @@
 # Discord qt monitor
-import discord, json, requests, time
+import discord, json, requests, time, os, keyboard
 from discord.ext import commands
 
 client=commands.Bot(command_prefix="/")
@@ -19,28 +19,36 @@ def refresh():
     with open("domains.txt", "r") as r:
         domains = r.read().splitlines()
 
-
+def sent(link):
+    print("Sent "+link)
+    requests.post(settings["webhook"], json={"content":"Sent "+link}, headers={"Content-Type": "application/json"})
 
 def go(ctx):
     try:
         link = ctx.embeds[0].url
         if len(str(link)) < 10:
-            raise
-    except:
+            raise KeyError
+    except KeyError:
         link = ctx.embeds[0].description.split("](")[1].split(")")[0]
         if len(str(link)) < 10:
             raise
-    else:
+    except:
         print("Error parsing link "+ctx.embeds[0].description)
     if settings["bot"] == "cybersoleqt":
         headers = {"Cookie":settings["botCookie"], "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"}
         requests.get("https://cybersole.io/dashboard/tasks?quicktask="+link, headers=headers)
+        sent(link)
     if settings["bot"] == "cybersoleqt":
         headers = {"Cookie":settings["botCookie"], "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"}
         requests.get("https://cybersole.io/dashboard/tasks?linkchange="+link, headers=headers)
+        sent(link)
+    elif settings["bot"] == "cheggaio":
+        command = 'echo | set /p nul=' + link.strip() + '| clip'
+        os.system(command)
+        keyboard.send('F9')
+        sent(link)
     else:
         print(settings["bot"]+" bot not supported")
-    print("Sent "+link)
 
 @client.event
 async def on_message(ctx):

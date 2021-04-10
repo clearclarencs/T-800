@@ -4,9 +4,9 @@
 Discord bot which monitors monitors and auto sends bot quicktasks.
 
 Currently only supports "cybersole".
-supproted bot types: "cybersoleqt" (cyber quick task), "cybersolelc" (cyber link change)
+supproted bot types: "cybersoleqt" (cyber quick task), "cybersolelc" (cyber link change) and cheggaio (no botCookie required)
 
-settings.json needs bot name, the dashboard cookie for the quicktask as described below and the discord user token.
+settings.json needs bot name, the dashboard cookie for the quicktask as described below, the discord user token a cooldown between quicktasks and a discord webhook address.
 
 For cybersole cookie is dashboard_session and should be formatted "dashboard_session=COOKIE;"
 
