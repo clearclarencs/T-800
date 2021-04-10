@@ -26,7 +26,7 @@ def sent(link):
 def go(ctx):
     try:
         link = ctx.embeds[0].url
-        if len(str(link)) < 10:
+        if len(str(link)) < 15:
             raise KeyError
     except:
         try:
@@ -44,7 +44,7 @@ def go(ctx):
         requests.get("https://cybersole.io/dashboard/tasks?linkchange="+link, headers=headers)
         sent(link)
     elif settings["bot"] == "cheggaio":
-        command = 'echo | set /p nul=' + link.strip() + '| clip'
+        command = 'echo | set /p nul=' + str(link).strip() + '| clip'
         os.system(command)
         keyboard.send('F9')
         sent(link)
@@ -57,16 +57,17 @@ async def on_message(ctx):
     refresh()
     if not str(ctx.channel.id) in channels:
         return
+    embedMost = str(str(ctx.embeds[0].title).lower()+str(ctx.embeds[0].description).lower()+str(ctx.embeds[0].url).lower())
     for keyword in keywords:
         keywordList = keyword.split(",")
         goodKw = True
         goodDom = False
         for kw in keywordList:
-            if not kw.lower() in str(str(ctx.embeds[0].title).lower()+str(ctx.embeds[0].title).lower()):
+            if not kw.lower() in embedMost:
                 goodKw = False
                 break
         for domain in domains:
-            if domain in str(ctx.embeds[0].url).lower():
+            if domain in embedMost:
                 goodDom = True
                 break
         if goodKw and goodDom:
