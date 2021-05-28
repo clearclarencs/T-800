@@ -55,7 +55,8 @@ def go(ctx):
 @client.event
 async def on_message(ctx):
     global keywords, channels, domains, lastSent
-    if lastSent + datetime.timedelta(0,settings["cooldown"]) > datetime.datetime.now()
+    if lastSent + datetime.timedelta(0,settings["cooldown"]) > datetime.datetime.now():
+        return
     refresh()
     if not str(ctx.channel.id) in channels:
         return
