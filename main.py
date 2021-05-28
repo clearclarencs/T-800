@@ -1,5 +1,5 @@
 # Discord qt monitor
-import discord, json, requests, time, os, keyboard
+import discord, json, requests, time, os, keyboard, datetime
 from discord.ext import commands
 
 client=commands.Bot(command_prefix="/")
@@ -7,6 +7,7 @@ client=commands.Bot(command_prefix="/")
 keywords = []
 channels = []
 domains = []
+lastSent = datetime.datetime.now()
 with open("settings.json", "r") as r:
     settings = json.loads(r.read())
 
@@ -53,7 +54,8 @@ def go(ctx):
 
 @client.event
 async def on_message(ctx):
-    global keywords, channels, domains
+    global keywords, channels, domains, lastSent
+    if lastSent + datetime.timedelta(0,settings["cooldown"]) > datetime.datetime.now()
     refresh()
     if not str(ctx.channel.id) in channels:
         return
@@ -72,7 +74,7 @@ async def on_message(ctx):
                 break
         if goodKw and goodDom:
             go(ctx)
-            time.sleep(settings["cooldown"])
+            lastSent = datetime.datetime.now()
             return
 
 
